@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+
+
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename = 'PreventDise.png' )  }}");
+            background-size: cover;
+        }
+    </style>
+
+
+    {% if request.method == 'POST'  %}
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            newTab();
+        });
+
+        function newTab() {
+            var form = document.createElement("form");
+            form.method = "GET";
+            form.action = "#popup1";
+            form.target = "_self";
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+    
+    {% endif %}
+
+
+    
+
+
+
+</head>
+
+<body>
+    <h1> coronary heart disease (CHD) Prediction </h1>
+
+
+
+    <div>
+        <form method="POST" action="">
+            <div class="container">
+                <table>
+                    {%  for i in form %}
+                    {% if i != form.submit %}
+                    <tr>
+                        <div class="form-group">
+                            <td>{{ i.label }}</td>
+                            <td>{{i}}</td>
+                        </div>
+                    </tr>
+                    {% endif %}
+                    {% endfor%}
+                </table>
+                {{ form.submit(class ="btn btn-primary" ) }}
+            </div>
+        </form>
+
+    </div>
+
+
+
+
+    <div>
+        <h3>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <!-- <ul class=flashes> -->
+                {% for message in messages %}
+                
+
+                <div id="popup1" class="overlay">
+                    <div class="popup">
+                        <h2>Your Result</h2>
+                        <a class="close" href="#">&times;</a>
+                        <div class="content">
+                            {{ message }}
+                        </div>
+                    </div>
+                </div>
+            
+
+
+
+
+                {% endfor %}
+            <!-- </ul> -->
+            {% endif %}
+            {% endwith %}
+        </h3>
+    </div>
+
+
+    
+
+    {% if request.method == 'POST'  %}
+    <a class="my-link">{{""}}</a>
+    {% endif %}
+
+
+
+</body>
+
+</html>
